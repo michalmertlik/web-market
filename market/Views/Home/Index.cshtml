@@ -1,0 +1,41 @@
+﻿@model List<Child>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (Model.Count > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Jméno</th>
+                <th scope="col">Věk</th>
+                <th scope="col">Pohlaví</th>
+                <th scope="col">Cena</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbsody>
+            @foreach (var child in Model)
+            {
+            <tr>
+                <th scope="row">@child.Id</th>
+                <td>@child.DisplayName</td>
+                <td>@child.BirthDate</td>
+                <td>@child.Gender.GetName()</td>
+                <td>@child.Price</td>
+                <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@child.Id"><i class="fa fa-pen"></i></a></td>
+                <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@child.Id"><i class="fa fa-trash"></i></a></td>
+            </tr>
+            }
+        </tbsody>
+    </table>
+}
+else
+{ 
+    <p>Nebyly nalezeny žádné výsledky</p>
+}
+
+<a asp-controller="Home" asp-action="Add" role="button" class="btn btn-primary">Přidat nové dítě</a>
